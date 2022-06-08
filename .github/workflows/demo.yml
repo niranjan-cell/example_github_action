@@ -1,18 +1,22 @@
-name: Node Continuous Integration
+name: DevOps Github Actions Demo
 
-on:
-  pull_request:
-    branches: [ master ]
-
+on: push
 
 jobs:
-  test_pull_request:
+  demo:
+    name: Github actions Demo
     runs-on: ubuntu-latest
-    steps:
+
+    steps: 
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+
+      - name: Check the file
+        run: ls -lrt
+
+      - uses: actions/setup-java@v3
         with:
-          node-version: 12
-      - run: npm ci
-      - run: npm test
-      - run: npm run build
+         distribution: 'temurin' # See 'Supported distributions' for available options
+         java-version: '17'
+    
+      - name: Check Java version 
+        run: java --version
